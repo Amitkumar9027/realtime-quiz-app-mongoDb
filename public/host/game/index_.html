@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Game | KahootClone</title>
+    <link rel="stylesheet" href="../../css/hostGameView.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
+</head>
+
+<body>
+    <!-- <h4 id = "questionNum">Question  <span>1</span> / <span>x</span> </h4>
+        <h4 id = "playersAnswered">Players Answered: <span>1</span> / <span>x</span></h4>
+        <h3 id = "timerText">Time Left:<span id = "num"> 20</span></h3>
+        
+
+        <button onclick="buzzerResponse(true)">Correct Buzzer</button>
+        <button onclick="buzzerResponse(false)">Incorrect Buzzer</button>
+
+        <div class = "square" id = "square1"></div>
+        <div class = "square" id = "square2"></div>
+        <div class = "square" id = "square3"></div>
+        <div class = "square" id = "square4"></div>
+        
+        <h2 id = "question">Question</h2>
+        <h3 id = "answer1">Answer</h3>
+        <br>
+        <h3 id = "answer2">Answer</h3>
+        <br>
+        <h3 id = "answer3">Answer</h3>
+        <br>
+        <h3 id = "answer4">Answer</h3>
+        
+        <br>
+        <button onclick = "nextQuestion()" id = "nextQButton">Next Question</button> -->
+
+    <div class="container">
+        <!-- Header section -->
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="Org Logo" width="50">
+                <span>Bharat Ko Jano</span>
+            </div>
+            <div class="header-info">
+                <span>Players: 10</span>
+                <span>Answered: 0</span>
+                <span>Questions: 20</span>
+                <span>Round : 1 / x</span>
+            </div>
+        </header>
+
+        <!-- Main section and right panel -->
+        <div class="main-content">
+            <!-- Main Section -->
+            <div class="main-section">
+                <!-- Display Panel -->
+                <div class="display-panel">
+                    <div class="question">
+                        <p><span>प्र. 1:</span> हिंदी में सवाल</p>
+                        <p><span>Q. 1:</span> Question in English</p>
+                    </div>
+                    <div class="marks"></div>
+                        <span>+5</span>
+                        <span>-2</span>
+                    </div>
+                    <div class="options">
+                        <p>1. <span>Option 1</span></p>
+                        <p>2. <span>Option 1</span></p>
+                        <p>3. <span>Option 1</span></p>
+                        <p>4. <span>Option 1</span></p>
+                    </div>
+                </div>
+                
+                <!-- Control Strip -->
+                <!-- flow
+                1. initially 'display-responses' is shown => popup (answer / responses)
+                2. add a new button 'next-question' => for dispalying next question
+                    2.1 dynamic in operation , 'next-question' or 'next-round' or 'end-quiz' -->
+                <div class="control-strip">
+                    <button id="display-responses">Display Responses</button>
+                    <!-- This button will change to "Next Question", "Next Round", or "End Quiz" dynamically -->
+                    <button id="next-question">Next Question</button>
+                    <button id="next-round">Next Round</button>
+                    <button id="end-quiz">End Quiz</button>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="right-panel">
+                <div class="timer">
+                    <div class="circular-timer">Timer</div>
+                </div>
+                <div class="leaderboard">
+                    <div class="leaderboard-tabs">
+                        <button>Overall</button>
+                        <button>MCQ</button>
+                        <button>Buzzer</button>
+                    </div>
+                    <div class="leaderboard-list">
+                        <!-- Scrollable leaderboard items here -->
+                        <p>Player 1: 100 points</p>
+                        <p>Player 2: 90 points</p>
+                        <!-- More players -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup for showing responses or buzzer answer -->
+    <div class="popup" id="response-popup" style="display: none;">
+        <span class="popup-close" onclick="closePopup()">X</span>
+        <h4>answer</h4>
+        <p>responses</p>
+        <button id="correctBuzzer">Correct</button>
+        <button id="incorrectBuzzer">Incorrect</button>
+    </div>
+
+    <!-- Buzzer animation component -->
+    <div id="buzzer-flash" class="buzzer-flash" style="display: none;">
+        Player 1 Pressed the Buzzer!
+    </div>
+
+    <script src="../../socket.io/socket.io.js"></script>
+    <script src="../../js/libs/jqueryLibrary.js"></script>
+    <script src="../../js/libs/deparam.js"></script>
+    <script src="../../js/hostGame.js"></script>
+</body>
+
+</html>

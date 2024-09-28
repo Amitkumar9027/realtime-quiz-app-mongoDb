@@ -1,0 +1,71 @@
+<!-- uploadForm.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form</title>
+</head>
+<body>
+    <h2>Upload Image and Audio Files</h2>
+    <form id="uploadForm" enctype="multipart/form-data" action="/upload" method="POST">
+        <label for="userId">Enter your ID:</label>
+        <input type="text" id="userId" name="userId" required><br><br>
+
+        <label for="images">Select image files:</label>
+        <input type="file" id="images" name="images" accept="image/*" multiple><br><br>
+
+        <label for="audio">Select audio files:</label>
+        <input type="file" id="audio" name="audio" accept="audio/*" multiple><br><br>
+
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>View Uploaded Files by User ID</h2>
+    <form id="viewFilesForm" method="GET">
+        <label for="userId_v">Enter your ID:</label>
+        <input type="text" id="userId_v" name="userId_v" required><br><br>
+        <button type="submit">View Files</button>
+    </form>
+
+    <h3>Uploaded Images</h3>
+    <div id="imageFiles"></div>
+
+    <h3>Uploaded Audio Files</h3>
+    <div id="audioFiles"></div>
+
+    <script>
+        document.getElementById('viewFilesForm').onsubmit = async (event) => {
+            event.preventDefault();
+            const userId = document.getElementById('userId_v').value;
+
+            const response = await fetch(`/files/${userId}`);
+            const files = await response.json();
+            console.log(files)
+            // Display image files
+            const imageContainer = document.getElementById('imageFiles');
+            imageContainer.innerHTML = ''; // Clear previous content
+            files.images.forEach(image => {
+                const img = document.createElement('img');
+                img.src = `uploads/${image}`;
+                img.alt = image;
+                img.style.width = '200px';
+                imageContainer.appendChild(img);
+            });
+
+            // Display audio files
+            const audioContainer = document.getElementById('audioFiles');
+            audioContainer.innerHTML = ''; // Clear previous content
+            files.audio.forEach(audio => {
+                const audioElement = document.createElement('audio');
+                audioElement.src = `../server/uploads/${audio}`;
+                audioElement.controls = true;
+                audioContainer.appendChild(audioElement);
+            });
+
+            // const response = await fetch(`/image/${userId}`);
+
+        };
+    </script>
+</body>
+</html>
